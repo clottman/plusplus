@@ -1,0 +1,23 @@
+<div class="jumbotron">
+	<h1 class="text-center">Hello</h1>
+</div>
+<div class="container">
+<div id='counter_list'>
+	<% for @c in @counters %>
+		<% if @c.active %>
+			<%= render partial: 'counter', locals: {counter: @c} %>
+		<% end %>
+	<% end %>
+</div>
+<br />
+
+<%= form_for @new_counter, remote: true  do |f| %> 
+	<%= f.label :name, "Name:" %>
+	<%= f.text_field :name %> <br />
+
+	<%= f.label :count, "Starting count:" %>
+	<%= f.text_field :count, value: '0' %> <br />
+
+	<%= f.submit %> 
+<% end %>
+</div>
