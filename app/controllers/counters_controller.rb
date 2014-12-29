@@ -1,4 +1,5 @@
 class CountersController < ApplicationController
+#require 'pusher'
 
 	def index
 		@counters = Counter.all
@@ -9,6 +10,8 @@ class CountersController < ApplicationController
 		@counter = Counter.find(params[:id])
 		@counter.count = @counter.count + 1
 		@counter.save
+
+		Pusher.trigger_async('all_counters', 'increment', {@counter.name => @counter.count.to_s})
 		render 'redraw_counter'
 	end
 
