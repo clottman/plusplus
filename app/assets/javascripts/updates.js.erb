@@ -1,0 +1,10 @@
+$(document).ready(function(){
+	var pusher = new Pusher("<%= ENV['pusher_key'] %>");
+	var channel = pusher.subscribe('all_counters');
+
+	channel.bind('increment', function(data) {
+		var id = data['counter_id'];
+		var new_count = data['new_count'];
+		$('#' + id + '_count').html(new_count); 
+	});
+})

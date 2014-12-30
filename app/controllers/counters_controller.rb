@@ -11,7 +11,7 @@ class CountersController < ApplicationController
 		@counter.count = @counter.count + 1
 		@counter.save
 
-		Pusher.trigger_async('all_counters', 'increment', {@counter.name => @counter.count.to_s})
+		Pusher.trigger_async('all_counters', 'increment', {counter_id: @counter.id, new_count: @counter.count })
 		render 'redraw_counter'
 	end
 
