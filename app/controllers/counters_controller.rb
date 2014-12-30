@@ -12,7 +12,7 @@ class CountersController < ApplicationController
 		@counter.save
 
 		Pusher.trigger_async('all_counters', 'increment', {counter_id: @counter.id, new_count: @counter.count })
-		render 'redraw_counter'
+		head :ok, content_type: "text/html"
 	end
 
 	def create
