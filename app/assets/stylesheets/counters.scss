@@ -1,3 +1,15 @@
 // Place all the styles related to the counters controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.center {text-align: center;}
+.jumbotron {background-color: #9E03A3;}
+.jumbotron h1 {color: #FFF;}
+.counter-info {min-width:150px; display:inline-block; text-align:left;}
+.increment {margin-right:15px;}
+
+label {width: 117px;}
+#new_counter label {text-align:left;}
+input[type=text] {margin-bottom:5px;}
+
+.btn {padding: 5px 12px; margin-bottom:5px;}

@@ -1,5 +1,4 @@
 class CountersController < ApplicationController
-#require 'pusher'
 
 	def index
 		@counters = Counter.where(active: true)
