@@ -20,7 +20,8 @@ class CountersController < ApplicationController
 		@counter = Counter.create(counter_params)
 		@counter.save
 		Pusher.trigger_async('all_counters', 'update', @counter.to_json)
-		head :ok, content_type: "text/html"
+		@new_counter = Counter.new
+		render "redraw_new_counter"
 	end
 
 	def destroy

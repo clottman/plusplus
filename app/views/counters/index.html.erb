@@ -12,16 +12,7 @@
 
 </div>
 <br />
-
-<%= form_for @new_counter, remote: true  do |f| %> 
-	<%= f.label :name, "Name:" %>
-	<%= f.text_field :name %> <br />
-
-	<%= f.label :count, "Starting count:" %>
-	<%= f.text_field :count, value: '0' %> <br />
-
-	<%= f.submit %> 
-<% end %>
+<%= render partial: "new_counter", locals: {new_counter: @new_counter} %>
 </div>
 
 
