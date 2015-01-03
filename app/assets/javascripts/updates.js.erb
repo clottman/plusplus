@@ -3,7 +3,7 @@ $(document).ready(function(){
 	var channel = pusher.subscribe('all_counters');
 
 
-	channel.bind('increment', function(data) {
+	channel.bind('update', function(data) {
  		var index = viewModel.counters.mappedIndexOf(data);
 	    if(index < 0) { 
 	         viewModel.counters.push(ko.mapping.fromJS(data));
@@ -12,13 +12,21 @@ $(document).ready(function(){
 	    }
 	});
 
-	channel.bind('new', function(data) {
-		viewModel.counters.push(ko.mapping.fromJS(data));
+	channel.bind('delete', function(data) {
+		viewModel.counters.mappedRemove(ko.mapping.fromJS(data));
 	});
 
 	$("#counter_list").on("click", ".increment", function() {
     	data_id = ko.dataFor(this).id();
     	$.post('counters/' + data_id + '/increment');
+	});
+
+	$("#counter_list").on("click", ".delete", function() {
+		data_id = ko.dataFor(this).id();
+		$.ajax({
+			url: 'counters/' + data_id,
+			type: 'DELETE'
+		});
 	});
 
 })
