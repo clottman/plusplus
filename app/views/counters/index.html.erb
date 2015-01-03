@@ -1,11 +1,18 @@
+<style>
+.jumbotron {background-color: #9E03A3;}
+.jumbotron h1 {color: #FFF;}
+.counter-info {min-width:150px; display:inline-block;}
+.increment {margin-right:15px;}
+</style>
+
 <div class="jumbotron">
-	<h1 class="text-center">Hello</h1>
+	<h1 class="text-center">Let's count stuff!</h1>
 </div>
 <div class="container">
 <div id='counter_list' data-bind="foreach: counters">
 
 	<div class='row'>
-		<span data-bind="text: name"></span>,<span data-bind="text: count"></span>
+		<span class="counter-info"><span data-bind="text: name"></span>,<span data-bind="text: count"></span></span>
 		<a class="btn btn-default increment">+1</a>
 		<a class="btn btn-default delete">Delete</a>
 	</div>
