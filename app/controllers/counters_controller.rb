@@ -12,7 +12,6 @@ class CountersController < ApplicationController
 		@counter.count = @counter.count + 1
 		@counter.save
 
-		#Pusher.trigger_async('all_counters', 'increment', {counter_id: @counter.id, new_count: @counter.count })
 		Pusher.trigger_async('all_counters', 'increment', @counter.to_json)
 		head :ok, content_type: "text/html"
 	end
@@ -20,6 +19,8 @@ class CountersController < ApplicationController
 	def create
 		@counter = Counter.create(counter_params)
 		@counter.save
+		Pusher.trigger_async('all_counters', 'new', @counter.to_json)
+		head :ok, content_type: "text/html"
 	end
 
 	def destroy

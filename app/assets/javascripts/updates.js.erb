@@ -6,13 +6,15 @@ $(document).ready(function(){
 	channel.bind('increment', function(data) {
  		var index = viewModel.counters.mappedIndexOf(data);
 	    if(index < 0) { 
-	         viewModel.push(ko.mapping.fromJSON(data));
+	         viewModel.counters.push(ko.mapping.fromJS(data));
 	    } else {
 	       ko.mapping.fromJS(data, counters_mapping, viewModel.counters()[index]);
 	    }
-
 	});
 
+	channel.bind('new', function(data) {
+		viewModel.counters.push(ko.mapping.fromJS(data));
+	});
 
 	$("#counter_list").on("click", ".increment", function() {
     	data_id = ko.dataFor(this).id();
