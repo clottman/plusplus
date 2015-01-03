@@ -12,5 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require knockout
+//= require knockout.mapping
 //= require pusher_2.2.min
-//= require updates
+//= require_tree .

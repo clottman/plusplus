@@ -2,12 +2,13 @@
 	<h1 class="text-center">Hello</h1>
 </div>
 <div class="container">
-<div id='counter_list'>
-	<% for @c in @counters %>
-		<% if @c.active %>
-			<%= render partial: 'counter', locals: {counter: @c} %>
-		<% end %>
-	<% end %>
+<div id='counter_list' data-bind="foreach: counters">
+
+	<div class='row'>
+		<span data-bind="text: name"></span>,<span data-bind="text: count"></span>
+		<a class="btn btn-default increment">+1</a>
+	</div>
+
 </div>
 <br />
 
@@ -21,3 +22,20 @@
 	<%= f.submit %> 
 <% end %>
 </div>
+
+
+<script>
+counters_json = <%= (@vm.to_json.html_safe) %>;
+
+var counters_mapping = {
+    'counters': {
+        key: function(data) {
+            return ko.utils.unwrapObservable(data.id);
+        }
+    }
+}
+
+var viewModel = ko.mapping.fromJS(counters_json, counters_mapping);
+ko.applyBindings(viewModel);
+
+</script>

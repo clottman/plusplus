@@ -2,8 +2,9 @@ class CountersController < ApplicationController
 #require 'pusher'
 
 	def index
-		@counters = Counter.all
+		@counters = Counter.where(active: true)
 		@new_counter = Counter.new
+		@vm = {counters: @counters}
 	end
 
 	def increment
@@ -11,7 +12,8 @@ class CountersController < ApplicationController
 		@counter.count = @counter.count + 1
 		@counter.save
 
-		Pusher.trigger_async('all_counters', 'increment', {counter_id: @counter.id, new_count: @counter.count })
+		#Pusher.trigger_async('all_counters', 'increment', {counter_id: @counter.id, new_count: @counter.count })
+		Pusher.trigger_async('all_counters', 'increment', @counter.to_json)
 		head :ok, content_type: "text/html"
 	end
 
