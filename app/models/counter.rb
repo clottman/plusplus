@@ -13,5 +13,14 @@
 class Counter < ActiveRecord::Base
 	validates :name, presence: true
 
+	def increment!
+		self.count = self.count + 1
+		self.save
+	end
+
+	def deactivate!
+		self.active = false
+		self.save
+	end
 
 end

@@ -8,9 +8,7 @@ class CountersController < ApplicationController
 
 	def increment
 		@counter = Counter.find(params[:id])
-		@counter.count = @counter.count + 1
-		@counter.save
-
+		@counter.increment!
 		Pusher.trigger_async('all_counters', 'update', @counter.to_json)
 		head :ok, content_type: "text/html"
 	end
@@ -25,8 +23,7 @@ class CountersController < ApplicationController
 
 	def destroy
 		@counter = Counter.find(params[:id])
-		@counter.active = false
-		@counter.save
+		@counter.deactivate!
 		Pusher.trigger_async('all_counters', 'delete', @counter.to_json)
 		head :ok, content_type: "text/html"
 	end
